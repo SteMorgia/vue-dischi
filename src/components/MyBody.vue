@@ -1,11 +1,13 @@
 <template>
-    <div>
-        <SingleCard v-for="(card, index) in cardsList" :key="index" :card="card"/>
+    <div class="container mt-3">
+        <div class="row row-cols-5 g-3">
+            <SingleCard v-for="(card, index) in cardsList" :key="index" :card="card"/>
+        </div>
     </div>
 </template>
 
 <script>
-import SingleCard from './components/SingleCard.vue';
+import SingleCard from './SingleCard.vue';
 import axios from 'axios'
 
 export default {
@@ -27,13 +29,20 @@ export default {
             let that = this;
             axios.get(this.endpoint)
             .then(function (response) {
-                that.cardsList = response.data;
+                that.cardsList = response.data.response;
             })
         }
     }
 }
 </script>
 
-<style>
-
+<style scoped lang="scss">
+    .container {
+        width:60%;
+        display:flex;
+        flex-wrap: wrap;;
+        justify-content: center;
+        align-items:center;
+        flex-basis: 20%;
+    }
 </style>
