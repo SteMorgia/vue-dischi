@@ -1,18 +1,21 @@
 <template>
   <div id="app">
+    <MyOption/>
     <MyBody/>
   </div>
 </template>
 
 <script>
-import MyBody from './components/MyBody.vue'
+import MyBody from './components/MyBody.vue';
+import MyOption from './components/MyOption.vue';
 
 
 
 export default {
   name: 'App',
   components: {
-    MyBody
+    MyBody,
+    MyOption
   }
 }
 </script>
