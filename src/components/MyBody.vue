@@ -30,7 +30,7 @@ export default {
             if(this.genreToSearch == '') {
                 return this.cardsList;
             } else {
-                const arrayDiscs = this.discs.filter(disc => {
+                const arrayDiscs = this.cardList.filter(disc => {
                     if (disc.genre == this.genreToSearch) {
                         return true;
                     } else {
