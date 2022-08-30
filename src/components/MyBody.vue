@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-3">
         <div class="row row-cols-5 g-3">
-            <SingleCard v-for="(card, index) in cardsList" :key="index" :card="card"/>
+            <SingleCard v-for="(card, index) in filteredDiscs" :key="index" :card="card"/>
         </div>
     </div>
 </template>
@@ -18,7 +18,27 @@ export default {
     data() {
         return {
             cardsList: [],
+            genres: [],
             endpoint: 'https://flynn.boolean.careers/exercises/api/array/music'
+        }
+    },
+    props: {
+        genreToSearch: String
+    },
+    computed: {
+        filteredDiscs() {
+            if(this.genreToSearch == '') {
+                return this.discs;
+            } else {
+                const arrayDiscs = this.discs.filter(disc => {
+                    if (disc.genre == this.genreToSearch) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+                return arrayDiscs;
+            }
         }
     },
     created() {
@@ -29,7 +49,14 @@ export default {
             let that = this;
             axios.get(this.endpoint)
             .then(function (response) {
+                let arrayGeners = [];
                 that.cardsList = response.data.response;
+                that.cardsList.forEach(element => {
+                    if (!arrayGeners.includes(element.genre)) {
+                        arrayGeners.push(element.genre)
+                    }
+                } )
+                that.$emit('setGeneri', arrayGeners);
             })
         }
     }

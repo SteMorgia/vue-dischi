@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <MyOption/>
-    <MyBody/>
+    <MyOption @changedGenre="startSearch" :genersType="geners"/>
+    <MyBody @setGeneri="saveGeners" :genreToSearch="genreToSearch"/>
   </div>
 </template>
 
@@ -16,6 +16,20 @@ export default {
   components: {
     MyBody,
     MyOption
+  },
+  data(){
+    return {
+      geners: [],
+      genreToSearch: ''
+    }
+  },
+  methods: {
+    saveGeners(geners) {
+      this.geners = geners
+    },
+    startSearch(genreToSearch) {
+      this.genreToSearch = genreToSearch;
+    }
   }
 }
 </script>
