@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-3">
         <div class="row row-cols-5 g-3">
-            <SingleCard v-for="(card, index) in filteredDiscs" :key="index" :card="card"/>
+            <SingleCard v-for="(discItem, index) in filteredDiscs" :key="index" :disc="discItem"/>
         </div>
     </div>
 </template>
@@ -28,7 +28,7 @@ export default {
     computed: {
         filteredDiscs() {
             if(this.genreToSearch == '') {
-                return this.discs;
+                return this.cardsList;
             } else {
                 const arrayDiscs = this.discs.filter(disc => {
                     if (disc.genre == this.genreToSearch) {
